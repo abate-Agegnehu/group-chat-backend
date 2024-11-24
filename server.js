@@ -9,6 +9,7 @@ const mongoose = require("mongoose");
 const app = express();
 const server = http.createServer(app);
 const MONGO_URL = process.env.MONGO_URL;
+const FRONTEND_URL = process.env.FRONTEND_URL;
 // MongoDB Connection String
 mongoose.connect(MONGO_URL, {
   useNewUrlParser: true,
@@ -35,7 +36,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 const io = new Server(server, {
   cors: {
-    origin: "https://abategroupchat.netlify.app", // Frontend URL
+    origin: FRONTEND_URL, // Frontend URL
     methods: ["GET", "POST"],
   },
 });
