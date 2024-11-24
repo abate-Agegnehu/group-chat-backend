@@ -1,21 +1,19 @@
 const http = require("http");
 const path = require("path");
 const express = require("express");
+require("dotenv").config();
 const cors = require("cors");
 const { Server } = require("socket.io");
 const mongoose = require("mongoose");
 
 const app = express();
 const server = http.createServer(app);
-
+const MONGO_URL = process.env.MONGO_URL;
 // MongoDB Connection String
-mongoose.connect(
-  "mongodb+srv://abateagegnehu574:8d6vodNyJCBVoc7v@chatapp.5q6gu.mongodb.net/?retryWrites=true&w=majority&appName=ChatApp",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }
-);
+mongoose.connect(MONGO_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
